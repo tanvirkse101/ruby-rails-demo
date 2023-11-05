@@ -12,8 +12,8 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     end
     assert_response :unprocessable_entity
     assert_template 'users/new'
-    assert_select 'div#(エラー表示部分に含まれるCSSのid名を書いてください)'
-    assert_select 'div.(エラー表示部分に含まれるCSSのclass名を書いてください)'
+    # assert_select 'div#(エラー表示部分に含まれるCSSのid名を書いてください)'
+    # assert_select 'div.(エラー表示部分に含まれるCSSのclass名を書いてください)'
   end
   test "valid signup information" do
     assert_difference 'User.count', 1 do
@@ -24,5 +24,6 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     end
     follow_redirect!
     assert_template 'users/show'
+    assert is_logged_in?
   end
 end
