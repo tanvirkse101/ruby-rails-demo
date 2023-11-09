@@ -1,4 +1,5 @@
 require "test_helper"
+include ApplicationHelper
 
 class SiteLayoutTest < ActionDispatch::IntegrationTest
 
