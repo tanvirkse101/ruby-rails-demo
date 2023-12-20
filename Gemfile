@@ -56,6 +56,9 @@ gem "bootsnap", require: false
 # Bootstrap Gem
 gem "bootstrap-sass",  "3.4.1"
 
+# Fontawesome
+gem 'font-awesome-sass', '~> 5.15'
+
 #testing
 gem 'rails-controller-testing'
 

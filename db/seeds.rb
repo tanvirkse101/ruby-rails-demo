@@ -23,7 +23,14 @@ end
 users = User.order(:created_at).take(6)
 50.times do
   content = Faker::Lorem.sentence(word_count: 5)
-  users.each { |user| user.microposts.create!(content: content) }
+  users.each do |user|
+    micropost = user.microposts.create!(content: content)
+    # Create comments for each micropost
+    3.times do
+      contents = Faker::Lorem.sentence(word_count: 3)
+      micropost.comments.create!(user: users.sample, content: contents)
+    end
+  end
 end
 
 # ユーザーフォローのリレーションシップを作成する

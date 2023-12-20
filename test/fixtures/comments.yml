@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  content: "Test comment 1"
+  created_at: <%= 3.years.ago %>
+  user: archer
+  micropost: ants
+
+two:
+  content: "Test comment 2"
+  created_at: <%= 4.years.ago %>
+  user: michael
+  micropost: orange
