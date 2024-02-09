@@ -1,0 +1,13 @@
+membership_1:
+  user: <%= user(:michael).id %>
+  group: <%= group(:example_group).id %>
+
+membership_2:
+  user: <%= user(:archer).id %>
+  group: <%= group(:example_group).id %>
+
+<% 5.times do |n| %>
+membership_<%= n+3 %>:
+  user: <%= user("user_#{n}").id %>
+  group: <%= group("group_#{n}").id %>
+<% end %>

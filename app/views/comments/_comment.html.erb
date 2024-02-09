@@ -9,7 +9,7 @@
     </b>
   </span><br>
   <% if comment.image.attached? %>
-    <%= image_tag comment.image.variant(:display), class: 'rounded' %>
+    <%= image_tag comment.image.variant(:display), class: 'center-block', style: 'max-width=100px; border-radius: 5px;' %>
     <br>
   <% end %>
   <span>

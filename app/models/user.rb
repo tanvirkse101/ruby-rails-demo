@@ -11,11 +11,13 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
   has_many :microposts, dependent: :destroy
   has_many :active_relationships,  class_name:  "Relationship", foreign_key: "follower_id", dependent: :destroy
-  has_many :passive_relationships, class_name:  "Relationship",
-                                   foreign_key: "followed_id",
-                                   dependent:   :destroy
+  has_many :passive_relationships, class_name:  "Relationship", foreign_key: "followed_id", dependent:   :destroy
   has_many :following, through: :active_relationships,  source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
+
+  has_many :created_groups, class_name: 'Group', foreign_key: 'user_id', dependent: :destroy
+  has_many :group_memberships, dependent: :destroy
+  has_many :groups, through: :group_memberships
 
   # 渡された文字列のハッシュ値を返す
   def User.digest(string)

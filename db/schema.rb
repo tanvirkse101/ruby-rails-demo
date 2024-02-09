@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_07_230836) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_06_172018) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -48,6 +48,25 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_07_230836) do
     t.index ["micropost_id", "user_id", "created_at"], name: "index_comments_on_micropost_id_and_user_id_and_created_at"
     t.index ["micropost_id"], name: "index_comments_on_micropost_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "group_memberships", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "group_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_group_memberships_on_group_id"
+    t.index ["user_id", "group_id", "created_at"], name: "index_group_memberships_on_user_id_and_group_id_and_created_at"
+    t.index ["user_id"], name: "index_group_memberships_on_user_id"
+  end
+
+  create_table "groups", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "created_at"], name: "index_groups_on_user_id_and_created_at"
+    t.index ["user_id"], name: "index_groups_on_user_id"
   end
 
   create_table "microposts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -88,5 +107,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_07_230836) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "microposts"
   add_foreign_key "comments", "users"
+  add_foreign_key "group_memberships", "groups"
+  add_foreign_key "group_memberships", "users"
+  add_foreign_key "groups", "users"
   add_foreign_key "microposts", "users"
 end
