@@ -126,4 +126,8 @@ class User < ApplicationRecord
     following.include?(other_user)
   end
 
+  #　ユーザーがグループに参加する
+  def join(group)
+    groups << group unless groups.include?(group)
+  end
 end

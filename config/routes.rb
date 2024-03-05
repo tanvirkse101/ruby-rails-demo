@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     resources :comments, only: [:create, :destroy, :edit, :update]
   end
   resources :relationships,       only: [:create, :destroy]
-  # resoursces :groups
-  # resoursces :group_memberships
+  resources :groups
+  resources :group_memberships, only: [:create, :destroy]
   get '/microposts', to: 'static_pages#home'
 end
