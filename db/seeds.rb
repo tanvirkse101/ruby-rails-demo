@@ -36,7 +36,7 @@ end
 # Each user creates a group 各ユーザーはグループを作成する
 users.each do |user|
   group_name = Faker::Lorem.word.capitalize
-  group = user.created_groups.create!(name: group_name)
+  group = user.created_groups.create!(name: group_name, description: Faker::Lorem.sentence(word_count: 20))
 
   # Add members to the group (excluding the creator) グループにメンバーを追加する（作成者を除く）
   members = users.sample(5) - [user]

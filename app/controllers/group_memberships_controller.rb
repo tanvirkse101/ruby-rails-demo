@@ -10,6 +10,6 @@ class GroupMembershipsController < ApplicationController
     group_membership = current_user.group_memberships.find(params[:id])
     group = group_membership.group
     group_membership.destroy
-    redirect_to group_path(group), notice: "You have left the group #{group.name}"
+    redirect_to groups_path, notice: "You have left the group #{group.name}"
   end
 end
