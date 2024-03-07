@@ -1,5 +1,5 @@
 <% form_with(model: @group) do |f| %>
-    <% render 'shared/error_messages.html', object: f.object %>
+    <% render 'shared/error_messages', object: f.object %>
     <div class="field">
         <%= f.text_field :name, class: 'form-control form-control-lg', placeholder: "Name of the group" %>
         <%= f.text_field :description, class: 'form-control form-control-lg', placeholder: "A short description of the group" %>

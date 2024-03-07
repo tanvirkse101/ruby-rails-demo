@@ -4,4 +4,5 @@ class Group < ApplicationRecord
   has_many :members, through: :group_memberships, source: :user
 
   validates :name, presence: true, length: { maximum: 50 }
+  validates :description, presence: true, length: { maximum: 255 }
 end
