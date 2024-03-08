@@ -7,17 +7,25 @@
     </div>
     <div class="panel-body">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-9 border">
                 <h4>Members</h4>
                 <% @group.members.each do |user| %>
                 <%= link_to gravatar_for(user, size: 40), user %>
                 <% end %>
             </div>
-            <div class="col-md-6">
-                <h4>About</h4>
-                <p><%= @group.description %></p>
+            <div class="col-md-3 border">
+                <b>About</b>
+                <p><i><%= @group.description %></i></p>
             </div>
         </div>
+        <% if @is_member %>
+        <div class="row">
+            <div class="col-md-12 border">
+                <%= render 'chats/chat', chats: @chats %>
+                <%= render 'shared/chat_form', chat: Chat.new(group_id: @group.id, user_id: @current_user.id) %>
+            </div>
+        </div>
+        <% end %>
     </div>
     <div class="panel-footer text-center">
     <% if @creator %>

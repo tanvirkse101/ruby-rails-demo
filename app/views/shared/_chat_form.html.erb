@@ -1,0 +1,14 @@
+<%= form_with(model: chat, url: group_chats_path(@group), local: true) do |form| %>
+  <div class="field">
+    <%= render 'shared/error_messages', object: form.object %>
+    <hr>
+    <%= form.label :text, 'Send a message' %>
+    <%= form.text_field :text, class: 'form-control form-control-lg', placeholder: 'Write your chats here...' %>
+  </div>
+  <span class="image">
+    <%= form.file_field :image, accept: "image/jpeg,image/gif,image/png" %>
+  </span>
+  <div class="actions">
+    <%= form.submit 'Send', class: 'btn btn-primary' %>
+  </div>
+<% end %>

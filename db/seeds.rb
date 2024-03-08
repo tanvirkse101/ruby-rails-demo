@@ -33,17 +33,20 @@ users = User.order(:created_at).take(6)
   end
 end
 
-# Each user creates a group 各ユーザーはグループを作成する
+# Each user creates a group
 users.each do |user|
   group_name = Faker::Lorem.word.capitalize
   group = user.created_groups.create!(name: group_name, description: Faker::Lorem.sentence(word_count: 20))
 
-  # Add members to the group (excluding the creator) グループにメンバーを追加する（作成者を除く）
+  # Add members to the group (excluding the creator)
   members = users.sample(5) - [user]
   members.each do |member|
+    chat_text = Faker::Lorem.sentence(word_count: 20)
     group.members << member
+    Chat.create!(user: member, group: group, text: chat_text)
   end
 end
+
 
 # ユーザーフォローのリレーションシップを作成する
 users = User.all

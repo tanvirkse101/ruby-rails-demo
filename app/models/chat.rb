@@ -1,6 +1,6 @@
 class Chat < ApplicationRecord
   belongs_to :user
-  belongs_to :micropost
+  belongs_to :group
   has_one_attached :image do |attachable|
     attachable.variant :display, resize_to_limit: [500, 500]
   end

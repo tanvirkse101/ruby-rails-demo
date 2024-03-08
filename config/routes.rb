@@ -9,7 +9,9 @@ Rails.application.routes.draw do
   delete '/logout',  to: 'sessions#destroy'
   get    '/create-group',  to: 'groups#new'
   get    '/groups/:id/edit',  to: 'groups#edit'
-  patch  'groups/:id', to: 'groups#update'
+  patch  '/groups/:id', to: 'groups#update'
+  get    '/groups/:id/members', to: 'groups#members'
+
   resources :users do
     member do
       get :following, :followers
@@ -21,7 +23,9 @@ Rails.application.routes.draw do
     resources :comments, only: [:create, :destroy, :edit, :update]
   end
   resources :relationships,       only: [:create, :destroy]
-  resources :groups
+  resources :groups do
+    resources :chats, only: [:create, :destroy]
+  end
   resources :group_memberships, only: [:create, :destroy]
   get '/microposts', to: 'static_pages#home'
 end

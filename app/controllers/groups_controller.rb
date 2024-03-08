@@ -1,7 +1,6 @@
 class GroupsController < ApplicationController
 
   def index
-    # @groups = Group.all
     @joined = current_user.groups
     @notJoined = Group.where.not(id: @joined.pluck(:id))
     @group = Group.new
@@ -10,6 +9,8 @@ class GroupsController < ApplicationController
   def show
     @group = Group.find(params[:id])
     @creator = (current_user == @group.creator)
+    @chats = Chat.where(group_id: @group.id)
+    @is_member = check_membership(@group)
   end
 
   def new
@@ -36,8 +37,11 @@ class GroupsController < ApplicationController
     redirect_to groups_path, status: :see_other
   end
 
-  def group_params
-    params.require(:group).permit(:name, :description)
+  def members
+    @group = Group.find(params[:id])
+    @members = @group.members.paginate(page: params[:page], per_page: 10)
+    @non_members = User.where.not(id: @group.members.pluck(:id)).paginate(page: params[:page], per_page: 10)
+    render 'members'
   end
 
   def edit
@@ -55,4 +59,19 @@ class GroupsController < ApplicationController
       render 'edit'
     end
   end
+
+  private
+
+  def group_params
+    params.require(:group).permit(:name, :description)
+  end
+
+  def check_membership(group)
+    if current_user.groups.exists?(group.id)
+      return true
+    else
+      return false
+    end
+  end
+
 end

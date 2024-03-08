@@ -18,6 +18,8 @@ class User < ApplicationRecord
   has_many :created_groups, class_name: 'Group', foreign_key: 'user_id', dependent: :destroy
   has_many :group_memberships, dependent: :destroy
   has_many :groups, through: :group_memberships
+  has_many :chats, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   # 渡された文字列のハッシュ値を返す
   def User.digest(string)
