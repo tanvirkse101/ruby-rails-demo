@@ -18,13 +18,13 @@ Rails.application.configure do
     :domain         => host,
     :authentication => :plain,
   }
-
   # Code is not reloaded between requests.
   config.cache_classes = true
 
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
   # and those relying on copy on write to perform better.
+
   # Rake tasks automatically ignore this option for performance.
   config.eager_load = true
 
@@ -100,6 +100,7 @@ Rails.application.configure do
   # Use a different logger for distributed setups.
   # require "syslog/logger"
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new "app-name")
+  config.hosts << "ruby-rails-demo.onrender.com"
 
   if ENV["RAILS_LOG_TO_STDOUT"].present?
     logger           = ActiveSupport::Logger.new(STDOUT)
