@@ -6,11 +6,11 @@ ruby "3.2.0"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.8"
 
+# Use PostgreSQL as the database for Active Record
+gem "pg"
+
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
-
-# Use mysql as the database for Active Record
-gem "mysql2", "~> 0.5"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
@@ -59,7 +59,7 @@ gem "bootstrap-sass",  "3.4.1"
 # Fontawesome
 gem 'font-awesome-sass', '~> 5.15'
 
-#testing
+# Testing
 gem 'rails-controller-testing'
 
 
@@ -86,5 +86,4 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
-
 end
