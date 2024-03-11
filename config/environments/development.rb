@@ -17,6 +17,10 @@ Rails.application.configure do
   # Enable server timing
   config.server_timing = true
 
+  config.hosts << IPAddr.new("0.0.0.0/0")        # All IPv4 addresses.
+  config.hosts << IPAddr.new("::/0")             # All IPv6 addresses.
+  config.hosts << "localhost"                    # The localhost reserved domain.
+  config.hosts << ENV["RAILS_DEVELOPMENT_HOSTS"]  # Additional comma-separated hosts for development.
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
   if Rails.root.join("tmp/caching-dev.txt").exist?
