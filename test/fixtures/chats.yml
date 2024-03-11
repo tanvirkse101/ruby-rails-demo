@@ -1,7 +1,9 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  text: MyText
+  user: michael
+  group: example_group
+  text: "First chat text."
 
 two:
-  text: MyText
+  user: archer
+  group: another_group
+  text: "Second chat text."
