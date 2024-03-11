@@ -94,4 +94,6 @@ Rails.application.configure do
   # Allow binding to all IP addresses
   config.bind = '0.0.0.0'
 
+  config.hosts << "ruby-rails-demo.onrender.com"
+
 end
