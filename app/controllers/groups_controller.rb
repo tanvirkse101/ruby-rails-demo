@@ -39,10 +39,26 @@ class GroupsController < ApplicationController
 
   def members
     @group = Group.find(params[:id])
-    @members = @group.members.paginate(page: params[:page], per_page: 10)
-    @non_members = User.where.not(id: @group.members.pluck(:id)).paginate(page: params[:page], per_page: 10)
+    @creator = (current_user == @group.creator)
+
+    # Retrieve all members and non-members initially
+    all_members = @group.members
+    all_non_members = User.where.not(id: @group.members.pluck(:id))
+
+    # Apply search query if present
+    if params[:search].present?
+      search_term = params[:search].downcase
+      @members = all_members.where("LOWER(name) LIKE ?", "%#{search_term}%").paginate(page: params[:members_page], per_page: 5)
+      @non_members = all_non_members.where("LOWER(name) LIKE ?", "%#{search_term}%").paginate(page: params[:nonmembers_page], per_page: 5)
+    else
+      @members = all_members.paginate(page: params[:members_page], per_page: 5)
+      @non_members = all_non_members.paginate(page: params[:nonmembers_page], per_page: 5)
+    end
+
     render 'members'
   end
+
+
 
   def edit
     @group = Group.find(params[:id])
