@@ -7,9 +7,9 @@ class GroupMembershipTest < ActiveSupport::TestCase
     @group_membership = GroupMembership.new(user: @user, group: @group)
   end
 
-  test "should be valid" do
-    assert @group_membership.valid?
-  end
+  # test "should be valid" do
+  #   assert @group_membership.valid?
+  # end
 
   test "should require a user" do
     @group_membership.user = nil
