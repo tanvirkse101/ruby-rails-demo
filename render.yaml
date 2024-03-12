@@ -1,12 +1,12 @@
 databases:
-  - name: mysite
-    databaseName: mysite
-    user: mysite
+  - name: postgres
+    databaseName: db
+    user: ruby-rails-demo
     plan: free
 
 services:
   - type: web
-    name: mysite
+    name: ruby-rails-demo
     runtime: ruby
     plan: free
     buildCommand: "./bin/render-build.sh"
@@ -14,7 +14,7 @@ services:
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: mysite
+          name: postgres
           property: connectionString
       - key: RAILS_MASTER_KEY
         sync: false
