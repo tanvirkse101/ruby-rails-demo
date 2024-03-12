@@ -1,24 +1,55 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Welcome to the Ruby on Rails Demo Project!
 
-Things you may want to cover:
+This project is a simple web application built using Ruby on Rails. It is hosted at [Ruby on Rails Demo](https://ruby-rails-demo.onrender.com/).
 
-* Ruby version
+## How to Run the Project
 
-* System dependencies
+To run the project locally, follow these steps:
 
-* Configuration
+1. **Set up Docker Desktop**: Make sure you have Docker Desktop installed on your machine. You can download it from [here](https://www.docker.com/products/docker-desktop).
 
-* Database creation
+2. **Clone the Project**: Clone this repository to your local machine using the following command:
 
-* Database initialization
+   ```bash
+   git clone <repository-url>
+   ```
 
-* How to run the test suite
+3. **Create `master.key` File**: In the `/config/` folder of the project, create a file named `master.key` if it doesn't exist already. Paste the following key into the file:
 
-* Services (job queues, cache servers, search engines, etc.)
+   ```
+   5a2fd5b65a9584778405398c15fea8b9
+   ```
 
-* Deployment instructions
+4. **Run the Database Migration**: Execute the following command to create the database:
 
-* ...
+   ```bash
+   docker-compose run --rm web bundle exec rails db:create
+   ```
+
+5. **Start the Application**: After setting up the database, you can start the Rails server by running:
+
+   ```bash
+   docker-compose up
+   ```
+
+6. **Seed the DB**: After setting up the database, you can populate the DB with data by running:
+
+   ```bash
+   docker-compose exec web bash rails db:seed
+   ```
+
+7. **Start the application on local server**: You can start the Rails server by running:
+
+   ```bash
+   docker compose exec web bin/rails s -b 0.0.0.0
+   ```
+
+Visit [http://localhost:3001](http://localhost:3001) in your web browser to view the application.
+
+That's it! You now have the Ruby on Rails Demo project up and running locally on your machine.
+
+![alt text](image.png)
+![alt text](image-1.png)
+![alt text](image-2.png)
