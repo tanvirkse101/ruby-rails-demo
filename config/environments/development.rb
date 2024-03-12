@@ -21,7 +21,7 @@ Rails.application.configure do
   config.hosts << IPAddr.new("::/0")             # All IPv6 addresses.
   config.hosts << "localhost"                    # The localhost reserved domain.
   config.hosts << ENV["RAILS_DEVELOPMENT_HOSTS"]  # Additional comma-separated hosts for development.
-  config.hosts << "ruby-rails-demo.onrender.com"
+  # config.hosts << "ruby-rails-demo.onrender.com"
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
   if Rails.root.join("tmp/caching-dev.txt").exist?
