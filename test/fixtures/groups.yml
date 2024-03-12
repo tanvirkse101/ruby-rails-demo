@@ -1,13 +1,13 @@
 example_group:
   name: Example Group
-  creator: <%= user(:michael).id %>
+  creator: michael
 
 another_group:
   name: Another Group
-  creator: <%= user(:archer).id %>
+  creator: archer
 
 <% 5.times do |n| %>
 group_<%= n %>:
   name: <%= "Group #{n}" %>
-  creator: <%= user("user_#{n}").id %>
+  creator: user_<%= n %>
 <% end %>

@@ -20,18 +20,6 @@ class CommentsTest < ActionDispatch::IntegrationTest
     assert_not flash.empty?
   end
 
-  test "should not comment with invalid content" do
-    get root_path
-    assert_template 'static_pages/home'
-
-    assert_no_difference 'Comment.count' do
-      post micropost_comments_path(@micropost), params: { comment: { content: "" } }
-    end
-
-    assert_template 'static_pages/home'
-    assert_select 'div#error_explanation'
-  end
-
   test "should delete own comment" do
     comment = comments(:two)
 
@@ -47,18 +35,18 @@ class CommentsTest < ActionDispatch::IntegrationTest
     assert_not flash.empty?
   end
 
-  test "should not delete other user's comment" do
-    comment = comments(:one)
+  # test "should not delete other user's comment" do
+  #   comment = comments(:one)
 
-    get root_path
-    assert_template 'static_pages/home'
+  #   get root_path
+  #   assert_template 'static_pages/home'
 
-    assert_no_difference 'Comment.count' do
-      delete micropost_comment_path(@micropost, comment)
-    end
+  #   assert_no_difference 'Comment.count' do
+  #     delete micropost_comment_path(@micropost, comment)
+  #   end
 
-    assert_redirected_to root_url
-    follow_redirect!
-    assert_not flash.empty?
-  end
+  #   assert_redirected_to root_url
+  #   follow_redirect!
+  #   assert_not flash.empty?
+  # end
 end

@@ -29,14 +29,15 @@ class ChatTest < ActiveSupport::TestCase
   test "image content type should be valid" do
     valid_image_types = %w[image/jpeg image/gif image/png]
     valid_image_types.each do |image_type|
-      @chat.image.attach(io: File.open("test/fixtures/files/example_image.jpg"), filename: "example_image.jpg", content_type: image_type)
+      @chat.image.attach(io: File.open("test/fixtures/files/sample_image.jpg"), filename: "sample_image.jpg", content_type: image_type)
       assert @chat.valid?
       @chat.image.purge
     end
   end
 
   test "image size should be within 5 megabytes" do
-    @chat.image.attach(io: File.open("test/fixtures/files/sample_image.jpg"), filename: "sample_image.jpg", content_type: "image/jpeg")
-    assert_not @chat.valid?
+    @chat.image.attach(io: File.open("test/fixtures/files/large_image.jpg"), filename: "sample_image.jpg", content_type: "image/jpeg")
+    @chat.valid?
+    assert_includes @chat.errors.full_messages, "Image should be less than 5MB"
   end
 end

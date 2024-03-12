@@ -39,7 +39,7 @@ users.each do |user|
   group = user.created_groups.create!(name: group_name, description: Faker::Lorem.sentence(word_count: 20))
 
   # Add members to the group (excluding the creator)
-  members = users.sample(10) - [user]
+  members = users.sample(10)
   members.each do |member|
     chat_text = Faker::Lorem.sentence(word_count: 25)
     group.members << member
