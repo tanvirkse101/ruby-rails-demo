@@ -17,6 +17,11 @@ Rails.application.configure do
   # Enable server timing
   config.server_timing = true
 
+  config.hosts << IPAddr.new("0.0.0.0/0")        # All IPv4 addresses.
+  config.hosts << IPAddr.new("::/0")             # All IPv6 addresses.
+  config.hosts << "localhost"                    # The localhost reserved domain.
+  config.hosts << ENV["RAILS_DEVELOPMENT_HOSTS"]  # Additional comma-separated hosts for development.
+  # config.hosts << "ruby-rails-demo.onrender.com"
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
   if Rails.root.join("tmp/caching-dev.txt").exist?
@@ -38,6 +43,12 @@ Rails.application.configure do
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
+
+  host = 'localhost:3001' # ここをコピペすると失敗します。自分の環境のホストに変えてください。
+  # クラウドIDEの場合は以下をお使いください
+  config.action_mailer.default_url_options = { host: host, protocol: 'http' }
+  # localhostで開発している場合は以下をお使いください
+  # config.action_mailer.default_url_options = { host: host, protocol: 'http' }
 
   config.action_mailer.perform_caching = false
 

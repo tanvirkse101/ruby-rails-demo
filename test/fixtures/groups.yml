@@ -1,0 +1,13 @@
+example_group:
+  name: Example Group
+  creator: michael
+
+another_group:
+  name: Another Group
+  creator: archer
+
+<% 5.times do |n| %>
+group_<%= n %>:
+  name: <%= "Group #{n}" %>
+  creator: user_<%= n %>
+<% end %>

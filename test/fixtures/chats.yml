@@ -1,0 +1,9 @@
+one:
+  user: michael
+  group: example_group
+  text: "First chat text."
+
+two:
+  user: archer
+  group: another_group
+  text: "Second chat text."

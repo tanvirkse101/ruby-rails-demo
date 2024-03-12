@@ -1,0 +1,39 @@
+
+<div class="panel panel-primary">
+    <div class="panel-heading text-center"><h3><%= @group.name =%></h3><i>Admin: <%= @group.creator.name =%></i>
+        <% if @creator %>
+        <%= button_to "Edit", edit_group_path(@group), class: "btn btn-sm btn-info", method: :get %>
+        <% end %>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-9 border">
+                <h4>Members <%= link_to '| Edit Members', group_members_path(@group) if @creator =%></h4>
+                <% @group.members.each do |user| %>
+                <%= link_to gravatar_for(user, size: 40), user %>
+                <% end %>
+            </div>
+            <div class="col-md-3 border">
+                <h4>About</h4>
+                <p><i class="text-info"><%= @group.description %></i></p>
+            </div>
+        </div>
+        <% if @is_member %>
+        <div class="row">
+            <div class="col-md-12 border">
+                <%= render 'chats/chat', chats: @chats %>
+                <%= render 'shared/chat_form', chat: Chat.new(group_id: @group.id, user_id: @current_user.id) %>
+            </div>
+        </div>
+        <% end %>
+    </div>
+    <div class="panel-footer text-center">
+    <% if @creator %>
+        <%= button_to "Delete Group", group_path(@group), class: "btn btn-danger", method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this group?"} %>
+    <% elsif current_user.groups.include?(@group) %>
+        <%= button_to "Leave", group_membership_path(current_user.group_memberships.find_by(group_id: @group.id)), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to leave this group?"}, class: "btn btn-lg btn-danger" %>
+    <% else %>
+        <%= button_to "Join", group_memberships_path(group_id: @group.id), method: :post, class: "btn btn-lg btn-primary" %>
+    <% end %>
+    </div>
+</div>

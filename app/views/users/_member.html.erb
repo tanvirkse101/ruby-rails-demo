@@ -1,0 +1,6 @@
+<li>
+    <%= gravatar_for member, size: 50 %>
+    <%= link_to member.name, member %> | 
+    <%= button_to "X", remove_member_from_group_path(@group, member.id), class: "btn btn-sm btn-danger", method: :delete, data: { turbo_method: :delete, turbo_confirm: "Remove #{member.name} from the group?" } if @creator && member != current_user %>
+  </li>
+  

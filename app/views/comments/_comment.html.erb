@@ -1,0 +1,26 @@
+<% comments.reverse_each do |comment| %>
+<div class="comment-expand">
+  <span>
+    <b>
+      <% if comment.user.present? %>
+        <%= link_to gravatar_for(comment.user, size: 12), comment.user %>
+        <%= link_to comment.user.name, comment.user %> <b>:</b>
+      <% end %>
+    </b>
+  </span><br>
+  <% if comment.image.attached? %>
+    <%= image_tag comment.image.variant(:display), class: 'center-block', style: 'max-width=100px; border-radius: 5px;' %>
+    <br>
+  <% end %>
+  <span>
+    <%= comment.content %>
+    <% if comment.created_at.present? %>
+      <i class="small text-muted">Posted <%= time_ago_in_words(comment.created_at) %> ago.</i>
+    <% end %>
+    <% if current_user?(comment.user) %>
+      <%= link_to "<i class='fas fa-trash-alt'></i>".html_safe, micropost_comment_path(comment.micropost, comment), data: { "turbo-method": :delete, turbo_confirm: "You sure?" }, class: 'delete-link', title: 'Delete' %>
+    <% end %>    
+  </span>
+  <br>
+</div>
+<% end %>

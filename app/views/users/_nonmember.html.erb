@@ -1,0 +1,7 @@
+<li>
+  <%= gravatar_for nonmember, size: 50 %>
+  <%= link_to nonmember.name, nonmember %>
+  <% if @creator %>
+  <%= button_to "+", add_member_to_group_path(group_id: @group.id, user_id: nonmember.id), class: "btn btn-primary btn-sm",method: :post, data: { "turbo-method": :post, confirm: "Add #{nonmember.name} as a member?" } %>
+  <% end %>
+</li>

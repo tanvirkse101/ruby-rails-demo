@@ -1,0 +1,14 @@
+<%= form_with(model: [micropost, micropost.comments.build], local: true) do |form| %>
+  <div class="field">
+    <%= render 'shared/error_messages', object: form.object %>
+    <hr>
+    <%= form.label :content, 'Add a comment:' %>
+    <%= form.text_field :content, class: 'form-control form-control-lg', placeholder: 'Write your comment here...' %>
+  </div>
+  <span class="image">
+    <%= form.file_field :image, accept: "image/jpeg,image/gif,image/png" %>
+  </span>
+  <div class="actions">
+    <%= form.submit 'Post Comment', class: 'btn btn-primary' %>
+  </div>
+<% end %>

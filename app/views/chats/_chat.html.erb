@@ -1,0 +1,26 @@
+<% @chats.reverse_each do |chat| %>
+<div class="chat-expand">
+  <span>
+    <b>
+      <% if chat.user.present? %>
+        <%= link_to gravatar_for(chat.user, size: 12), chat.user %>
+        <%= link_to chat.user.name, chat.user %> <b>:</b>
+      <% end %>
+    </b>
+  </span><br>
+  <% if chat.image.attached? %>
+    <%= image_tag chat.image.variant(:display), style: 'max-width=100px; border-radius: 5px;' %>
+    <br>
+  <% end %>
+  <span>
+    <%= chat.text %>
+    <% if chat.created_at.present? %>
+      <i class="small text-muted">Posted <%= time_ago_in_words(chat.created_at) %> ago.</i>
+    <% end %>
+    <% if current_user?(chat.user) %>
+      <%= link_to "<i class='fas fa-trash-alt'></i>".html_safe, group_chat_path(chat.group, chat), data: { "turbo-method": :delete, turbo_confirm: "You sure?" }, class: 'delete-link', title: 'Delete' %>
+    <% end %>    
+  </span>
+  <br>
+</div>
+<% end %>

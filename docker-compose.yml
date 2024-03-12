@@ -1,21 +1,22 @@
 version: "3"
 services:
-    db:
-        image: mysql:8.0
-        ports:
-            - "3307:3306"
-        volumes:
-             - ./tmp/db:/var/lib/mysql
-        environment:
-            - MYSQL_ALLOW_EMPTY_PASSWORD=1
-    web:
-        build: .
-        command: bash -c "rm -f tmp/pids/server.pid && bundle install && bash"
-        tty: true
-        stdin_open: true
-        volumes:
-            - ".:/app"
-        ports:
-            - "3001:3000"
-        depends_on:
-            - db
+  db:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - PGDATA=/var/lib/postgresql/data/db/
+  web:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bundle install && bash"
+    tty: true
+    stdin_open: true
+    volumes:
+      - ".:/app"
+    ports:
+      - "3001:3000"
+    depends_on:
+      - db
