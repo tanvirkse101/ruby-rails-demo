@@ -1,7 +1,7 @@
 databases:
   - name: postgres
     databaseName: db
-    user: ruby-rails-demo
+    user: ror
     plan: free
 
 services:
