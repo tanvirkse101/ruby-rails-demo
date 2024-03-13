@@ -50,6 +50,22 @@ Visit [http://localhost:3001](http://localhost:3001) in your web browser to view
 
 That's it! You now have the Ruby on Rails Demo project up and running locally on your machine.
 
+## Ruby on Rails Demo Project
+
+![alt text](image-3.png)
+
+## Uml Diagram
+
+![alt text](Untitled.png)
+
+## Homepage
+
 ![alt text](image.png)
+
+## Mircroposts
+
 ![alt text](image-1.png)
+
+## Groups
+
 ![alt text](image-2.png)

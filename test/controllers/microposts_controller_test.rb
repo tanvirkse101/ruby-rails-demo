@@ -6,6 +6,7 @@ class MicropostsControllerTest < ActionDispatch::IntegrationTest
     @micropost = microposts(:orange)
   end
 
+  # ログインしていないときにリダイレクトして作成する
   test "should redirect create when not logged in" do
     assert_no_difference 'Micropost.count' do
       post microposts_path, params: { micropost: { content: "Lorem ipsum" } }
@@ -13,6 +14,7 @@ class MicropostsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to login_url
   end
 
+  # 非ログイン時にリダイレクト解除する必要がある。
   test "should redirect destroy when not logged in" do
     assert_no_difference 'Micropost.count' do
       delete micropost_path(@micropost)
@@ -21,6 +23,7 @@ class MicropostsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to login_url
   end
 
+  # 間違ったマイクロポストはリダイレクト解除すべき
   test "should redirect destroy for wrong micropost" do
     log_in_as(users(:michael))
     micropost = microposts(:ants)

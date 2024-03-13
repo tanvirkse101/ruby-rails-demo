@@ -1,8 +1,13 @@
 <% form_with(model: @group) do |f| %>
     <% render 'shared/error_messages', object: f.object %>
     <div class="field">
-        <%= f.text_field :name, class: 'form-control form-control-lg', placeholder: "Name of the group" %>
+        <%= f.text_field :name, class: 'form-control form-control-lg', placeholder: "Name of the group", required: true %>
         <%= f.text_field :description, class: 'form-control form-control-lg', placeholder: "A short description of the group" %>
     </div>
+    <% if @group.errors.any? %>
+        % @group.errors.full_messages.each do |message|%>\
+        <h3><%= message %> </h3>
+        <%end%>
+    <%end%>
     <%= f.submit "Create", class: "btn btn-primary" %>
 <% end %>

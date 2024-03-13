@@ -6,24 +6,28 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
     @group = groups(:example_group)
   end
 
+  # インデックスが必要
   test "should get index" do
     log_in_as(@michael)
     get groups_url
     assert_response :success
   end
 
+  # グループを表示する
   test "should show group" do
     log_in_as(@michael)
     get group_url(@group)
     assert_response :success
   end
 
+  # 新しい
   test "should get new" do
     log_in_as(@michael)
     get new_group_url
     assert_response :success
   end
 
+  # グループを作成する必要がある
   test "should create group" do
     log_in_as(@michael)
     assert_difference('Group.count') do
@@ -33,6 +37,7 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to group_url(Group.last)
   end
 
+  # 更新
   test "should get edit" do
     log_in_as(@michael)
     get edit_group_url(@group)
@@ -50,6 +55,7 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
   #   assert_equal "Updated Group", @group.name
   # end
 
+  # グループを解除する必要がある
   test "should destroy group" do
     log_in_as(@michael)
     assert_difference('Group.count', -1) do

@@ -10,6 +10,7 @@ class ChatsControllerTest < ActionDispatch::IntegrationTest
     @two_chat = chats(:two)
   end
 
+  # ログイン時にチャットを作成する
   test 'should create chat when logged in' do
     log_in_as(@michael)
     assert_difference 'Chat.count', 1 do
@@ -20,6 +21,7 @@ class ChatsControllerTest < ActionDispatch::IntegrationTest
     assert_select 'div.alert-info'
   end
 
+  # ログインしていないときにチャットを作成しない
   test 'should not create chat when not logged in' do
     assert_no_difference 'Chat.count' do
       post group_chats_path(@example_group), params: { chat: { text: 'Hello, world!' } }
@@ -27,6 +29,7 @@ class ChatsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to login_path
   end
 
+  # ログイン時にチャットを削除する必要がある
   test 'should destroy chat when logged in and correct user' do
     log_in_as(@michael)
     assert_difference 'Chat.count', -1 do
@@ -37,6 +40,7 @@ class ChatsControllerTest < ActionDispatch::IntegrationTest
     assert_select 'div.alert-info'
   end
 
+  # 間違ったユーザーでログインしてもチャットを削除する必要があります。
   test 'should not destroy chat when logged in as wrong user' do
     log_in_as(@archer)
     assert_no_difference 'Chat.count' do

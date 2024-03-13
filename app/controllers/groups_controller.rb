@@ -29,8 +29,8 @@ class GroupsController < ApplicationController
       current_user.join(@group)
       redirect_to group_path(@group)
     else
-      flash[:error] = "Group could not be created!"
-      redirect_to groups_path
+      flash[:error] = @group.errors.full_messages.to_sentence
+      redirect_to new_group_path
     end
   end
 

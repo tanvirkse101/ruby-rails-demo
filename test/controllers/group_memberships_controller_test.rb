@@ -19,7 +19,7 @@ class GroupMembershipsControllerTest < ActionDispatch::IntegrationTest
   #   assert_select 'div.notice', /Successfully joined the group/
   # end
 
-
+  # ログイン時にグループメンバーシップを解除する
   test 'should destroy group membership when logged in' do
     log_in_as(@michael)
     assert_difference '@michael.groups.count', -1 do
@@ -40,7 +40,7 @@ class GroupMembershipsControllerTest < ActionDispatch::IntegrationTest
   #   assert_select 'div.alert', /Added/
   # end
 
-
+  # ログイン時にメンバーをグループから削除する。
   test 'should remove member from the group when logged in' do
     log_in_as(@michael)
     assert_difference '@example_group.members.count', -1 do
