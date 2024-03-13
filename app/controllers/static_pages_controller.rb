@@ -1,5 +1,7 @@
 class StaticPagesController < ApplicationController
 
+
+  # 現在のユーザーのマイクロポストを含む（ふくむ）ホームページを表示する
   def home
     if logged_in?
       @micropost  = current_user.microposts.build

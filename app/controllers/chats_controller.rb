@@ -2,6 +2,7 @@ class ChatsController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy]
   before_action :correct_user,   only: :destroy
 
+  # 新しいチャットを作成する
   def create
     @group = Group.find(params[:group_id])
     @chat = @group.chats.build(chat_params)
@@ -14,6 +15,7 @@ class ChatsController < ApplicationController
     end
   end
 
+  #チャット削除
   def destroy
     @chat.destroy
     redirect_to group_path(@chat.group), flash: { success: 'Chat was successfully deleted.' }
@@ -21,6 +23,7 @@ class ChatsController < ApplicationController
 
   private
 
+  # チャットのグループを設定する
   def set_group
     @group = Group.find(params[:group_id])
   end
@@ -28,7 +31,7 @@ class ChatsController < ApplicationController
   def chat_params
     params.require(:chat).permit(:text, :image)
   end
-
+ # チャットの正しいユーザーを確認する
   def correct_user
     @group = Group.find(params[:group_id])
     @chat = @group.chats.find_by(id: params[:id])

@@ -3,26 +3,31 @@ class UsersController < ApplicationController
   before_action :correct_user,   only: [:edit, :update]
   before_action :admin_user,     only: :destroy
 
+  # List of users
   def index
     @users = User.where(activated: true).paginate(page: params[:page])
   end
 
+  # Show user and his microposts
   def show
     @user = User.find(params[:id])
     redirect_to root_url and return unless @user.activated == true
     @microposts = @user.microposts.paginate(page: params[:page])
   end
 
+  # New user form
   def new
     @user = User.new
   end
 
+  # Delete user
   def destroy
     User.find(params[:id]).destroy
     flash[:success] = "User deleted"
     redirect_to users_url, status: :see_other
   end
 
+  # Create a new user and send email
   def create
     @user = User.new(user_params)
     if @user.save
@@ -34,10 +39,12 @@ class UsersController < ApplicationController
     end
   end
 
+  # User edit form
   def edit
     @user = User.find(params[:id])
   end
 
+  # 編集（へんしゅ）フォームからユーザーを更新する
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
@@ -48,6 +55,7 @@ class UsersController < ApplicationController
     end
   end
 
+  # フォローしているユーザーを表示する
   def following
     @title = "Following"
     @user  = User.find(params[:id])
@@ -55,6 +63,7 @@ class UsersController < ApplicationController
     render 'show_follow'
   end
 
+  # フォロワーを表示する
   def followers
     @title = "Followers"
     @user  = User.find(params[:id])
@@ -69,15 +78,13 @@ class UsersController < ApplicationController
                                   :password_confirmation)
     end
 
-    # beforeフィルター
-
-    # 正しいユーザーかどうかを確認
+    # 正しいユーザーかどうかを確認する
     def correct_user
       @user = User.find(params[:id])
       redirect_to(root_url, status: :see_other) unless current_user?(@user)
     end
 
-    # 管理者かどうかを確認
+    # 管理者かどうかを確認する
     def admin_user
       redirect_to(root_url, status: :see_other) unless current_user.admin?
     end

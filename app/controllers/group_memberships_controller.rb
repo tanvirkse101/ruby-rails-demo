@@ -1,11 +1,14 @@
 # app/controllers/group_memberships_controller.rb
 class GroupMembershipsController < ApplicationController
+
+  # ユーザーがグループに参加する
   def create
     group = Group.find(params[:group_id])
     current_user.join(group)
     redirect_to group_path(group), notice: "Successfully joined the group #{group.name}"
   end
 
+  # ユーザーがグループを脱退する
   def destroy
     group_membership = current_user.group_memberships.find(params[:id])
     group = group_membership.group
@@ -13,6 +16,7 @@ class GroupMembershipsController < ApplicationController
     redirect_to groups_path, notice: "Left the group #{group.name}"
   end
 
+  # 管理者がメンバーをグループに追加する
   def add_member
     group = Group.find(params[:group_id])
     user = User.find(params[:user_id])
@@ -24,6 +28,7 @@ class GroupMembershipsController < ApplicationController
     end
   end
 
+ # 管理者がメンバーをグループから削除する
   def remove_member
     group = Group.find(params[:group_id])
     user = User.find(params[:user_id])

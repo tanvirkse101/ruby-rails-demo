@@ -6,6 +6,7 @@ class PasswordResetsController < ApplicationController
   def new
   end
 
+  # ユーザーパスワードをメールでリセットする
   def create
     @user = User.find_by(email: params[:password_reset][:email].downcase)
     if @user
@@ -22,20 +23,6 @@ class PasswordResetsController < ApplicationController
   def edit
   end
 
-  # def update
-  #   if params[:user][:password].empty?
-  #     @user.errors.add(:password, "can't be empty")
-  #     render 'edit', status: :unprocessable_entity
-  #   elsif @user.update(user_params)
-  #     @user.forget
-  #     reset_session
-  #     log_in @user
-  #     flash[:success] = "Password has been reset."
-  #     redirect_to @user
-  #   else
-  #     render 'edit', status: :unprocessable_entity
-  #   end
-  # end
   def update
     if params[:user][:password].empty?
       @user.errors.add(:password, "can't be empty")

@@ -2,6 +2,7 @@ class CommentsController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy]
   before_action :correct_user,   only: :destroy
 
+  # マイクロポストの下に新しいコメントを作成する
   def create
     @micropost = Micropost.find(params[:micropost_id])
     @comment = @micropost.comments.build(comment_params)
@@ -15,7 +16,7 @@ class CommentsController < ApplicationController
       render 'static_pages/home', status: :unprocessable_entity
     end
   end
-
+  # コメントを削除する
   def destroy
     @comment.destroy
     flash[:success] = "Comment deleted"

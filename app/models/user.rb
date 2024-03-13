@@ -33,9 +33,6 @@ class User < ApplicationRecord
     update_attribute(:activated,    true)
     update_attribute(:activated_at, Time.zone.now)
   end
-  # def activate
-  #   update_columns(activated: true, activated_at: Time.zone.now)
-  # end
 
   # 有効化用のメールを送信する
   def send_activation_email
