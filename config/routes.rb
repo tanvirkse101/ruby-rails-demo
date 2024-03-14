@@ -29,5 +29,6 @@ Rails.application.routes.draw do
     resources :chats, only: [:create, :destroy]
   end
   resources :group_memberships, only: [:create, :destroy]
+  resources :notices
   get '/microposts', to: 'static_pages#home'
 end
