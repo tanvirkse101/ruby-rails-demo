@@ -1,4 +1,5 @@
 class GroupsController < ApplicationController
+  before_action :logged_in_user, only: [:create, :destroy, :new, :edit, :update]
 
   # 全グループのリストを表示する
   def index

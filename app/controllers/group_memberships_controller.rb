@@ -1,5 +1,6 @@
 # app/controllers/group_memberships_controller.rb
 class GroupMembershipsController < ApplicationController
+   before_action :logged_in_user, only: [:create, :destroy, :add_member, :remove_member]
 
   # ユーザーがグループに参加する
   def create
