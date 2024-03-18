@@ -1,0 +1,13 @@
+membership_1:
+  user: michael
+  group: example_group
+
+membership_2:
+  user: archer
+  group: example_group
+
+<% 5.times do |n| %>
+membership_<%= n + 3 %>:
+  user: user_<%= n %>
+  group: group_<%= n %>
+<% end %>
