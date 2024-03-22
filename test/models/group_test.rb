@@ -2,7 +2,7 @@ require "test_helper"
 
 class GroupTest < ActiveSupport::TestCase
   def setup
-    @user = users(:michael) 
+    @user = users(:michael)
     @group = Group.new(name: "Example Group", description: "This is an example group", creator: @user)
   end
 

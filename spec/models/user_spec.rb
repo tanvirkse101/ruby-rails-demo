@@ -81,16 +81,18 @@ RSpec.describe User, type: :model do
     expect { @user.destroy }.to change(Micropost, :count).by(-1)
   end
 
-  # test "should follow and unfollow a user" do
-  #   expect(michael.following?(archer)).to be_falsey
-  #   michael.follow(archer)
-  #   expect(michael.following?(archer)).to be_truthy
-  #   expect(archer.followers.include?(michael)).to be_truthy
-  #   michael.unfollow(archer)
-  #   expect(michael.following?(archer)).to be_falsey
-  #   # A user cannot follow themselves
-  #   michael.follow(michael)
-  #   expect(michael.following?(michael)).to be_falsey
-  # end
-  
+  it "should follow and unfollow a user" do
+    michael = users(:michael)
+    archer = users(:archer)
+    expect(michael.following?(archer)).to be_falsey
+    michael.follow(archer)
+    expect(michael.following?(archer)).to be_truthy
+    expect(archer.followers.include?(michael)).to be_truthy
+    michael.unfollow(archer)
+    expect(michael.following?(archer)).to be_falsey
+    # A user cannot follow themselves
+    michael.follow(michael)
+    expect(michael.following?(michael)).to be_falsey
+  end
+
 end
