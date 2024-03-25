@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
-  get    '/create-group',  to: 'groups#new'
+  get    '/groups/new',  to: 'groups#new'
   get    '/groups/:id/edit',  to: 'groups#edit'
   patch  '/groups/:id', to: 'groups#update'
   get    '/groups/:id/members', to: 'groups#members', as: 'group_members'

@@ -58,7 +58,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
       user: {
         password:              "password",
         password_confirmation: "password",
-        admin: true  # This is where you specify the value for the admin attribute
+        admin: true
       }
     }
 
