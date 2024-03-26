@@ -91,8 +91,8 @@ class GroupsController < ApplicationController
 
   # 現在（げんざい）のユーザーがグループのメンバーかどうかをチェックする
   def check_membership(group)
-    if current_user.groups.exists?(group.id)
-      return true
+    if current_user
+      return current_user.groups.exists?(group.id)
     else
       return false
     end
