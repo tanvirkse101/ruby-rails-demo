@@ -68,4 +68,5 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 
   config.include SessionHelpers
+  config.include FactoryBot::Syntax::Methods
 end

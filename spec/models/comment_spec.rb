@@ -1,14 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
-  fixtures :users, :microposts
 
   before(:each) do
-    @comment = Comment.new(
-      user: users(:michael),
-      micropost: microposts(:orange),
-      content: "Test comment"
-    )
+    @user = create(:tanaka)
+    @micropost = create(:orange)
+    @comment = build(:comment, user: @user, micropost: @micropost)
   end
 
   it "should be valid" do

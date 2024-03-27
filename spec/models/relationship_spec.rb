@@ -1,11 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Relationship, type: :model do
-  fixtures :users
+  # fixtures :users
 
   before(:each) do
-    @relationship = Relationship.new(follower_id: users(:michael).id,
-    followed_id: users(:archer).id)
+    @tanaka = create(:tanaka)
+    @hiro = create(:hiro)
+    @relationship = create(:relationship, follower: @tanaka, followed: @hiro)
   end
 
   it "should be valid" do

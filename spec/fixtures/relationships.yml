@@ -1,15 +1,7 @@
 one:
-  follower: michael
+  follower: tanaka
   followed: lana
 
 two:
-  follower: michael
-  followed: malory
-
-three:
-  follower: lana
-  followed: michael
-
-four:
-  follower: archer
-  followed: michael
+  follower: hiro
+  followed: tanaka

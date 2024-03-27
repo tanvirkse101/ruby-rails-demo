@@ -1,10 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Micropost, type: :model do
-  fixtures :users, :microposts
 
   before(:each) do
-    @user = users(:michael)
+    @user = create(:tanaka)
     @micropost = @user.microposts.build(content: "Lorem ipsum")
   end
 
@@ -28,6 +27,7 @@ RSpec.describe Micropost, type: :model do
   end
 
   it "order should be most recent first" do
-    expect(microposts(:most_recent)).to eq(Micropost.first)
+    newest_micropost = create(:micropost, user: @user, content: "Bla bla bla",created_at: 1.day.ago)
+    expect(Micropost.first).to eq(newest_micropost)
   end
 end

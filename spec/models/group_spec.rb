@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe Group, type: :model do
   # pending "add some examples to (or delete) #{__FILE__}"
-  fixtures :users
+  # fixtures :users
 
   before(:each) do
-    @group = Group.new(name: "Example", description: "Example", creator: users(:michael))
+    @group = create(:group, name: "Example", description: "Example", creator: create(:tanaka))
   end
 
   it "should be valid" do

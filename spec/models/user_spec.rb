@@ -2,15 +2,15 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   # pending "add some examples to (or delete) #{__FILE__}"
-  fixtures :users
+  # fixtures :users
 
   before do
-    @user = User.new(
-      name: "Example User",
-      email: "user@example.com",
-      password: "foobar",
-      password_confirmation: "foobar"
-    )
+    @user = FactoryBot.build(:user,
+    name: "Example User",
+    email: "user@example.com",
+    password: "foobar",
+    password_confirmation: "foobar"
+  )
   end
 
   it "should be valid" do
@@ -82,17 +82,16 @@ RSpec.describe User, type: :model do
   end
 
   it "should follow and unfollow a user" do
-    michael = users(:michael)
-    archer = users(:archer)
-    expect(michael.following?(archer)).to be_falsey
-    michael.follow(archer)
-    expect(michael.following?(archer)).to be_truthy
-    expect(archer.followers.include?(michael)).to be_truthy
-    michael.unfollow(archer)
-    expect(michael.following?(archer)).to be_falsey
-    # A user cannot follow themselves
-    michael.follow(michael)
-    expect(michael.following?(michael)).to be_falsey
+    tanaka = create(:tanaka)
+    hiro = create(:hiro)
+    expect(tanaka.following?(hiro)).to be_falsey
+    tanaka.follow(hiro)
+    expect(tanaka.following?(hiro)).to be_truthy
+    expect(hiro.followers.include?(tanaka)).to be_truthy
+    tanaka.unfollow(hiro)
+    expect(tanaka.following?(hiro)).to be_falsey
+    tanaka.follow(tanaka)
+    expect(tanaka.following?(tanaka)).to be_falsey
   end
 
 end
